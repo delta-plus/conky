@@ -1,0 +1,5 @@
+#!/bin/bash
+
+POS=$(cmus-remote -Q 2>/dev/null | grep position | cut -d " " -f 2-)
+DUR=$(cmus-remote -Q 2>/dev/null | grep duration | cut -d " " -f 2-)
+echo $(($POS / 60)):$(printf "%02d" $(($POS % 60)))/$(($DUR / 60)):$(printf "%02d" $(($DUR % 60)))

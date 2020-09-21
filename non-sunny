@@ -1,0 +1,61 @@
+conky.config = {
+  background = true,
+  use_xft = true,
+  lua_load = 'conky-draw/conky_draw.lua',
+  lua_draw_hook_pre = 'main',
+  update_interval = 1,
+  total_run_times = 0,
+  net_avg_samples = 1,
+  cpu_avg_samples = 1,
+  if_up_strictness = 'link',
+  imlib_cache_size = 0,
+  double_buffer = true,
+  no_buffers = true,
+  format_human_readable,
+  override_utf8_locale = true,
+  text_buffer_size = 2048,
+  own_window_class = 'Conky',
+  own_window = true,
+  own_window_type = 'override',
+  own_window_transparent = true,
+  own_window_hints = undecorated,below,sticky,skip_taskbar,skip_pager,
+  alignment = 'top_right',
+  gap_x = 25,
+  gap_y = 10,
+  minimum_height = 120,
+  minimum_width = 1325,
+  draw_shades = false,
+  border_inner_margin = 5,
+  border_width = 5,
+  default_color = '00FFFF',
+  font = 'ShareTechMono-Regular:bold:size=11',
+  mpd_host = '127.0.0.1',
+  mpd_port = 6600
+}
+
+conky.text = [[
+  ${image /home/delta/pics/hexagon.png -p 7 -s 1325x120}
+  ${font Orbitron:bold:size=14} SYSTEM......................NETWORK..............COINS..............WEATHER..............................................MUSIC............................................................................................DATE..........${font}
+  ${offset -4} Battery: ${battery_percent BAT0}%
+  ${voffset 16}${offset -4} Storage: ${fs_free /}
+  ${voffset -50}${offset 183}Download: ${downspeed wlan0}
+  ${offset 183}${downspeedgraph wlan0 15,150}
+  ${offset 183}Upload: ${upspeed wlan0}
+  ${offset 183}${upspeedgraph wlan0 15,150}
+  ${voffset -68}${offset 352}BTC: ${execpi 600 coinmon -f btc | grep BTC | cut -c 53- | cut -d . -f 1}
+  ${offset 352}ETH: ${execpi 600 coinmon -f eth | grep ETH | cut -c 53- | cut -d . -f 1}
+  ${offset 352}LTC: ${execpi 600 coinmon -f ltc | grep LTC | cut -c 53- | cut -d . -f 1}
+  ${offset 352}XMR: ${execpi 600 coinmon -f xmr | grep XMR | cut -c 53- | cut -d . -f 1}
+  ${voffset -70}${offset 460}${execpi 14400 curl --silent wttr.in/spokane | grep '^$' -A 4 | grep -v '^$' | grep -v '^--$' | grep -v Follow | ./decolorize | sed -n '1p'}
+  ${offset 460}${execpi 14400 curl --silent wttr.in/spokane | grep '^$' -A 4 | grep -v '^$' | grep -v '^--$' | grep -v Follow | ./decolorize | sed -n '2p'}
+  ${offset 460}${execpi 14400 curl --silent wttr.in/spokane | grep '^$' -A 4 | grep -v '^$' | grep -v '^--$' | grep -v Follow | ./decolorize | sed -n '3p' | sed -e 's/― /-/g' | iconv -c -f utf-8 -t ascii | sed -e 's/.\{2\}\([0-9]\)/ \1/g'}
+  ${offset 460}${execpi 14400 curl --silent wttr.in/spokane | grep '^$' -A 4 | grep -v '^$' | grep -v '^--$' | grep -v Follow | ./decolorize | sed -n '4p'}
+  ${voffset -68}${offset 767}$mpd_title
+  ${offset 767}$mpd_artist
+  ${offset 767}$mpd_status
+  ${offset 767}$mpd_elapsed/$mpd_length
+  ${voffset -68}${offset 1202}${time %A}
+  ${offset 1202}${time %B %d}
+  ${offset 1202}${time %Y}
+  ${offset 1202}${time %H:%M}
+]]

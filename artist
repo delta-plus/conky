@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cmus-remote -Q 2>/dev/null | grep artist | cut -d " " -f 3-
