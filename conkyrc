@@ -32,7 +32,7 @@ conky.config = {
 }
 
 conky.text = [[
-  ${image /home/delta/pics/hexagon.png -p 7 -s 1325x120}
+  ${image ./hexagon.png -p 7 -s 1325x120}
   ${font Orbitron:bold:size=14} SYSTEM......................NETWORK..............COINS..............WEATHER..............................................MUSIC..........................................................................................DATE............${font}
   ${offset -4} Battery: ${battery_percent BAT0}%
   ${voffset 16}${offset -4} Storage: ${fs_free /}
